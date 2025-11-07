@@ -1,0 +1,111 @@
+.infinite-card-flow-container {
+  --container-max: 1400px;    
+  --container-pad: 18px;      
+  --container-gap-top: 44px;  
+  width: min(100%, var(--container-max));
+  margin: var(--container-gap-top) auto 0; 
+  padding: 0 var(--container-pad);
+  box-sizing: border-box;
+  z-index: 1;
+  cursor: grab;
+}
+
+.infinite-card-flow-container:active { cursor: grabbing; }
+
+.infinite-card-flow {
+  --bg: hsl(0 0% 8%);
+  --card-min: 150px; 
+  --card-clamp: clamp(var(--card-min), 22vmin, 360px); 
+  --container-height: min(82vh, 860px); 
+  width: 100%;
+  position: relative;
+  padding: 12px 0;
+}
+
+.infinite-card-flow .drag-proxy {
+  visibility: hidden;
+  position: absolute;
+  inset: 0;
+}
+
+.infinite-card-flow .boxes {
+  height: var(--container-height);
+  max-height: 860px;
+  min-height: 480px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 900px;
+  touch-action: none;
+  display: block;
+}
+
+.infinite-card-flow .box {
+  transform-style: preserve-3d;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--card-clamp);         
+  aspect-ratio: 1 / 1.4;            
+  min-width: var(--card-min);
+  display: none; 
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  pointer-events: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.52);
+  background: linear-gradient(180deg, #0f0f0f 0%, #171717 100%);
+}
+
+.infinite-card-flow .box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--img);
+  background-size: contain;       
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.98;
+  transform-origin: center;
+  z-index: 1;
+  background-color: transparent;  
+}
+
+.infinite-card-flow .box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.22));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.infinite-card-flow .box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.infinite-card-flow .box:nth-of-type(odd) { background: linear-gradient(180deg,#112,#0b1); }
+.infinite-card-flow .box:nth-of-type(even) { background: linear-gradient(180deg,#2ae,#06b); }
+
+@supports (-webkit-box-reflect: below) {
+  .infinite-card-flow .box { -webkit-box-reflect: below 6px linear-gradient(transparent, rgba(0,0,0,0.4)); }
+  .infinite-card-flow .box::before { display: none; }
+}
+
+@media (max-width: 1200px) {
+  .infinite-card-flow { --card-clamp: clamp(var(--card-min), 20vmin, 320px); }
+  .infinite-card-flow .boxes { --container-height: min(72vh, 720px); max-height: 720px; min-height: 420px; }
+}
+
+@media (max-width: 880px) {
+  .infinite-card-flow .boxes { height: 52vh; max-height: 520px; min-height: 320px; }
+  .infinite-card-flow .box { width: clamp(var(--card-min), 34vmin, 300px); }
+}

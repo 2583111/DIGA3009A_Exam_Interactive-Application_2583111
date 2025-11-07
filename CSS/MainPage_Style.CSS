@@ -1,0 +1,104 @@
+html {
+  background: #161616;
+  color: #5daec8;
+  font-style: normal;
+  font-display: block;
+  font-family: "Protest Strike";
+}
+
+body {
+  margin: 0;
+  padding: 28px;
+  font-family: "Oswald";
+  font-size: 18px;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1, h2 {
+  margin: 0;
+  letter-spacing: 0.07em;
+  color: #5daec8;
+}
+
+main {
+  display: block; 
+  margin: 48px;
+  gap: 40px;
+}
+
+.top-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  justify-content: space-between;
+}
+
+.top-row .intro {
+  flex: 1 1 60%;
+  margin: 0;
+  line-height: 1.5;
+  text-align: justify;
+  min-width: 220px;
+}
+
+.ball-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ball-stage {
+  flex: 0 0 320px; 
+  aspect-ratio: 1 / 1;
+  background: #5daec8;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(24, 185, 214, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 0 18px 0;
+  max-width: 320px;
+  min-width: 180px;
+}
+
+.hamburgBtn {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: #5daec8; 
+}
+
+.hamburgBtn .burger path {
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 0.18s ease;
+  fill: none;
+}
+
+@media (max-width: 880px) {
+  .top-row {
+    flex-direction: column;
+  }
+  .ball-stage {
+    margin-left: 0;
+    width: min(60vw, 320px);
+  }
+}

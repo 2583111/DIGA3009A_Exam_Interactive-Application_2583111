@@ -1,0 +1,141 @@
+.starter-container {
+  background: linear-gradient(180deg, rgba(30,58,138,0.08), rgba(30,58,138,0.02));
+  padding: 28px;
+  display: flex;
+  gap: 36px;
+  border-radius: 14px;
+  align-items: center;
+  justify-content: center;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.pokeball-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.pokeball-shadow {
+  width: 100%;
+  height: 100%;
+  background: url('../IMAGES/PokeBallSVG/SVG/PokeBall.svg') no-repeat center/contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0.28;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.pokeball {
+  width: 100%;
+  height: 100%;
+  background: url('../IMAGES/PokeBallSVG/SVG/PokeBall.svg') no-repeat center/contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+
+.pokemon-behind {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 120ms ease;
+}
+
+.pokemon-behind img {
+  width: 100%;
+  height: 100%;
+  image-rendering: crisp-edges;
+  object-fit: contain;
+}
+
+@media (max-width: 420px) {
+  .pokeball-wrapper { width: 76px; height: 76px; }
+}
+
+
+.cards-section,
+section  {
+  position: relative;
+}
+
+.tcg-binder-btn,
+.starter-picker-btn {
+  position: absolute;           
+  right: 22px;                  
+  background: rgba(92,172,199,0); 
+  color: #5cacc7;              
+  border: 0;
+  padding: 10px 14px;
+  font-family: "Oswald", system-ui, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 20;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  line-height: 1;
+}
+
+.cards-section .tcg-binder-btn {
+  top: calc( (var(--infinite-flow-height, 300px)) + 18px );
+}
+
+.cards-section .tcg-binder-btn {
+  top: calc(100% + 12px); 
+}
+
+.starter-container + .starter-picker-btn,
+section .starter-picker-btn {
+  top: calc(100% + 8px); 
+  transform: translateY(0);
+}
+
+.tcg-binder-btn:hover,
+.starter-picker-btn:hover,
+.tcg-binder-btn:focus,
+.starter-picker-btn:focus {
+  outline: none;
+  transform: translateX(-3px);
+  transition: transform 120ms ease;
+}
+
+@media (max-width: 680px) {
+  .tcg-binder-btn,
+  .starter-picker-btn {
+    right: 12px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .cards-section .tcg-binder-btn { top: calc(100% + 8px); }
+  .starter-container + .starter-picker-btn { top: calc(100% + 6px); }
+}
+
+.choose-starter-text {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 18px 0 8px 0;
+  font-family: "Oswald", system-ui, sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  color: #5daec8;
+}

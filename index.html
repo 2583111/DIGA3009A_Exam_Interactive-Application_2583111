@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PokePortal Hompage" />
+  <meta name="author" content="Kesavan Naicker" />
+  <meta name="keywords" content="Pokemon, Pokemon Cards, Cards, Pokedex, Gen1, Gen2, Gen3, Gen4, Gen5, Gen6, Gen7, Gen8, Gen9" />
+  <title>PokePortal</title>
+
+  <!-- FONTS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Protest Strike" />
+
+  <!--CSS -->
+  <link rel="stylesheet" href="./CSS/MainPage_Style.CSS" />
+  <link rel="stylesheet" href="./CSS/BurbgerMenu_Style.CSS" />
+  <link rel="stylesheet" href="./CSS/PokeBallSpin_Styles.CSS" />
+  <link rel="stylesheet" href="./CSS/CardScroll_Style.CSS" />
+  <link rel="stylesheet" href="./CSS/StarterPokemon_Style.CSS" />
+  <link rel="stylesheet" href="./CSS/Footer_Style.CSS" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MorphSVGPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+</head>
+
+<body>
+<header>
+  <h1>POKEPORTAL</h1>
+
+  <!-- Burbger Menu -->
+  <h2>
+    <button class="hamburgBtn" id="menuButton" aria-controls="siteMenu" aria-expanded="false" aria-label="Toggle menu">
+      <svg class="burger" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" focusable="false">
+        <path id="barTop"    d="M4 6 L20 6"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.6"/>
+        <path id="barMid"    d="M4 12 L20 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.6"/>
+        <path id="barBottom" d="M4 18 L20 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.6"/>
+      </svg>
+    </button>
+  </h2>
+
+  <nav aria-hidden="true"></nav>
+</header>
+
+  <main>
+
+    <div class="top-row">
+      <p class="intro">
+        Hello there! Welcome to the world of Pokémon! This is PokePortal. Many Pokémon inhabit this world; from the tallest mountains to the deepest seas, countless Pokémon live, train, and evolve, each with its own story to tell. Use this portal to explore regions, uncover rare species, and learn the secrets behind every species. A whole new world is waiting. Are you ready?
+      </p>
+
+      <div class="ball-wrap" aria-label="Pokéball display">
+        <div class="ball-stage" id="ballStage" aria-label="Pokéball stage" role="region"></div>
+      </div>
+    </div>
+    
+
+    <section class="cards-section" aria-label="Scrolling Pokémon cards" role="region">
+      <div class="infinite-card-flow-container" id="infiniteCardFlowContainer">
+        <div class="infinite-card-flow" id="infiniteCardFlow" aria-hidden="false">
+          <div class="boxes" aria-hidden="false">
+            <div class="drag-proxy" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+        <button class="tcg-binder-btn" id="TCGbinderBtn" href="TCG">TCG >>></button>
+    </section>
+
+
+ 
+   <section>
+      <p class="choose-starter-text">
+        CHOOSE YOUR STARTER
+      </p>
+    <div class="starter-container" id="starterContainer">
+      <div class="pokeball-wrapper"></div>
+      <div class="pokeball-wrapper"></div>
+      <div class="pokeball-wrapper"></div>
+   </div>
+       <button class="starter-picker-btn" id="starterPickerBtn" href="POKEDEX">POKEDEX >>></button>
+
+   </section>
+
+
+  </main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <strong>POKEPORTAL</strong> — built by 2583111
+    </div>
+    <div class="footer-right">
+      <span class="note">© <span id="year"></span> PokePortal. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+  <!--Javascripts-->
+<script type="module">
+  import { initialise } from "./JavaScript/menu.js";
+  // create the DOM markup for the menu items first
+  document.addEventListener("DOMContentLoaded", () => initialise("HOME"));
+</script>
+
+<script type="module" src="./JavaScript/menuPanel.js"></script>
+<script type="module" src="./JavaScript/burgerMenu.js"></script>
+
+  <script src="./JavaScript/pokeBallSpin.js"></script>
+  <script src="./JavaScript/infiniteCardFlow.js"></script>
+  <script type="module" src="./JavaScript/app.js"></script>
+  <script type="module" src="./JavaScript/starterPokemon.js"></script>
+
+</body>
+</html>

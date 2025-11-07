@@ -1,0 +1,176 @@
+main {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.sub-header-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px;
+  box-sizing: border-box;
+
+  position: absolute;
+  top: 190px; 
+
+  transform: translateY(-14vh); 
+}
+
+.sub-header {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1;
+  font-family: "Oswald";
+  color: #5daec8;
+  text-align: center;
+  letter-spacing: 0.12em;
+  width: 100%;
+  display: block;
+  
+}
+
+@media (min-width: 1400px) {
+  .sub-header { max-width: 780px; margin-left: auto; margin-right: auto; }
+}
+
+.search-btn {
+  position: fixed;
+  right: 18px;
+  top: 64px;
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  color: #5cacc7;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 140ms ease, opacity 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.search-btn:hover,
+.search-btn:focus {
+  transform: translateY(-3px);
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  .search-btn { right: 12px; width: 40px; height: 40px; }
+}
+
+
+.gen-grid {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0 12px;
+  gap: 18px;
+}
+.gen-item { display:flex; width:100%; align-items:center; box-sizing:border-box; }
+
+.gen-link {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: calc(50% - 6%);
+  min-height: 260px;
+  padding: 0;
+  margin: 0;
+  border-radius: 12px;
+  background: transparent;
+  overflow: visible;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 180ms ease;
+}
+
+.gen-item:nth-child(odd)  { justify-content: flex-start;  padding-left: 4%; }
+.gen-item:nth-child(even) { justify-content: flex-end;   padding-right: 4%; }
+
+.gen-link .gen-shape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(550px, 48vw); 
+  height: auto;
+  transform: translate(-50%, -50%); 
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+  will-change: transform, opacity;
+  transition: transform 260ms ease;
+}
+
+.gen-link > .gen-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, -50%); 
+  z-index: 2;
+  pointer-events: auto;
+  text-align: center;
+  font-family: "Oswald";
+  line-height: 1;
+  user-select: none;
+  padding: 8px 6px;
+}
+
+.gen-link:focus-visible { outline: none; }
+.gen-link:focus-visible > .gen-content {
+  box-shadow: 0 0 0 4px rgba(92,172,199,0.08);
+  border-radius: 8px;
+}
+
+.gen-link:hover { transform: translateY(-6px); }
+.gen-link:active { transform: translateY(-2px); }
+
+.gen-item:nth-child(odd)  .gen-region,
+.gen-item:nth-child(odd)  .gen-generation { color: #D4FCAC; }
+.gen-item:nth-child(even) .gen-region,
+.gen-item:nth-child(even) .gen-generation { color: #5daec8; }
+
+.gen-region { font-size: 22px; font-weight:700; margin:0; letter-spacing:0.03em; }
+.gen-generation {
+  font-size: 12px;
+  opacity: 0.95;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px; 
+  margin-top: 6px;
+  white-space: nowrap; 
+}
+
+@media (max-width: 880px) {
+  .gen-link { width: 100%; min-height: 180px; }
+  .gen-item { justify-content: center; padding-left: 0; padding-right: 0; }
+  .gen-link .gen-shape { width: min(360px, 88%); transform: translate(-50%, -50%); }
+  .gen-link > .gen-content { width: 86%; transform: translate(-50%, -50%); padding: 6px 8px; }
+}
+
+@media (max-width: 720px) {
+  .gen-link { width: 100%; min-height: 140px; }
+  .gen-link .gen-shape { width: min(320px, 92%); transform: translate(-50%, -50%); left:50%; }
+  .gen-link > .gen-content { width: 92%; transform: translate(-50%, -50%); }
+}
+
+.pokedex-grid, #loading, #error { display: none !important; }

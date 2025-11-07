@@ -1,0 +1,29 @@
+
+.back-link {
+  display: inline-block;            
+  font-family: "Oswald", system-ui, sans-serif;
+  font-size: 14px;
+  color: #5daec8;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transform-origin: left center;    
+  will-change: transform, color;
+  cursor: pointer;
+  transition: color 220ms ease, transform 220ms ease; 
+}
+
+.back-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 6px rgba(92,172,199,0.06);
+  border-radius: 6px;
+}
+
+@media (max-width: 420px) {
+  .back-link { font-size: 13px; padding: 6px 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-link { transition: none; }
+}

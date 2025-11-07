@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PokePortal Card Binder" />
+  <meta name="author" content="Kesavan Naicker" />
+  <meta name="keywords" content="Pokemon, Pokedex, Regions, Gen1, Gen2, Gen3, Gen4, Gen5, Gen6, Gen7, Gen8, Gen9" />
+  <title>PokePortal Pokedex</title>
+
+
+  <!-- FONTS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/MainPage_Style.CSS" />
+  <link rel="stylesheet" href="../CSS/PokeDexPage_Style.CSS" />
+  <link rel="stylesheet" href="../CSS/BurbgerMenu_Style.CSS" />
+  <link rel="stylesheet" href="../CSS/Footer_Style.CSS" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MorphSVGPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MotionPathPlugin.min.js"></script>
+
+</head>
+<body>
+ 
+  <header>
+    <h1>POKEPORTAL</h1>
+    <h2>
+      <button class="hamburgBtn" id="menuButton" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle menu">
+        <svg class="burger" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" focusable="false">
+          <path id="barTop"    d="M4 6 L20 6"  fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.6"/>
+          <path id="barMid"    d="M4 12 L20 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.6"/>
+          <path id="barBottom" d="M4 18 L20 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.6"/>
+        </svg>
+      </button>
+    </h2>
+  </header>
+
+
+  <main>
+    <div class="sub-header-wrap">
+      <p class="sub-header" id="regionHeader">Pokédex</p>
+    </div>
+
+    <button class="search-btn" id="searchBtn" aria-label="Open search" type="button">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" role="img">
+        <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 21l-4.35-4.35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div style="max-width:1100px;margin: 20px auto; padding: 120px;">
+
+      <section class="gen-section" aria-label="Choose Pokémon generation">
+        <div class="gen-grid" id="genGrid">
+
+          <!-- Generation buttons -->
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=1" data-gen="1" aria-label="Gen 1 Kanto">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/LEFT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">KANTO</h3>
+                <div class="gen-generation">Generation 1</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=2" data-gen="2" aria-label="Gen 2 Johto">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/RIGHT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">JOHTO</h3>
+                <div class="gen-generation">Generation 2</div>
+              </div>
+            </a>
+          </div>
+
+ 
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=3" data-gen="3" aria-label="Gen 3 Hoenn">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/LEFT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">HOENN</h3>
+                <div class="gen-generation">Generation 3</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=4" data-gen="4" aria-label="Gen 4 Sinnoh">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/RIGHT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">SINNOH</h3>
+                <div class="gen-generation">Generation 4</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=5" data-gen="5" aria-label="Gen 5 Unova">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/LEFT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">UNOVA</h3>
+                <div class="gen-generation">Generation 5</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=6" data-gen="6" aria-label="Gen 6 Kalos">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/RIGHT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">KALOS</h3>
+                <div class="gen-generation">Generation 6</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=7" data-gen="7" aria-label="Gen 7 Alola">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/LEFT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">ALOLA</h3>
+                <div class="gen-generation">Generation 7</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=8" data-gen="8" aria-label="Gen 8 Galar">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/RIGHT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">GALAR</h3>
+                <div class="gen-generation">Generation 8</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gen-item">
+            <a class="gen-link" href="regionPage.html?gen=9" data-gen="9" aria-label="Gen 9 Paldea">
+              <svg class="gen-shape" aria-hidden="true" focusable="false" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" role="img">
+                <use href="../IMAGES/PokedexSVG/LEFT Container.svg"></use>
+              </svg>
+              <div class="gen-content">
+                <h3 class="gen-region">PALDEA</h3>
+                <div class="gen-generation">Generation 9</div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <div id="pokedexContainer" style="margin-top:28px;">
+        <div id="loading" aria-live="polite">Loading Pokémon…</div>
+        <div id="error" style="display:none;color:#f55;margin-top:12px;"></div>
+        <div class="pokedex-grid" id="pokedexGrid" style="margin-top:12px;"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left"><strong>POKEPORTAL</strong> — built by 2583111</div>
+      <div class="footer-right"><span class="note">© <span id="year"></span> PokePortal. All rights reserved.</span></div>
+    </div>
+  </footer>
+ 
+   <!--Javascripts--> 
+  <script type="module" src="../JavaScript/burgerMenu.js"></script>
+  <script type="module" src="../JavaScript/searchButton.js"></script>
+  <script type="module" src="../JavaScript/SVGcontainerfix.js"></script>
+</body>
+</html>
