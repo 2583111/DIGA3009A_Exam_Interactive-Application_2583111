@@ -1,6 +1,6 @@
 (function initialiseBurgerMenu() {
   const menuItems = [
-    { name: "HOME", href: "../index.html" },
+    { name: "HOME", href: "/index.html" },
     { name: "TCG", href: "../Pokemon Card Page/index.html" },
     { name: "POKEDEX", href: "../Pokedex Page/index.html" },
   ];

@@ -4,7 +4,6 @@ export const menuItems = [
   { name: "HOME", href: root + "/index.html" },
   { name: "TCG", href: `${root}/Pokemon Card Page/index.html` },
   { name: "POKEDEX", href: `${root}/Pokedex Page/index.html` },
-  { name: "SETTINGS", href: `${root}/settings.html` },
 ];
 
 export function initialise(currentPage) {
