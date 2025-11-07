@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const svgFolder = '../IMAGES/PokeBallSVG/SVG/'; 
+  const REPO_ROOT = '/DIGA3009A_Exam_Interactive-Application_2583111';
+  const svgFolder = `${REPO_ROOT}/IMAGES/PokeBallSVG/SVG/`;
   const fallbackFiles = [
     'PokeBall.svg',
     'GreatBall.svg',
@@ -16,7 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const stage = document.getElementById('ballStage');
   if (!stage) { console.error('pokeBallSpin: missing #ballStage'); return; }
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const GSAP = window.gsap || null;
   let wrappers = [];         // injected wrapper elements
   let current = -1;
   let spinTween = null;
@@ -27,18 +30,30 @@ document.addEventListener('DOMContentLoaded', () => {
   async function fetchText(url) {
     try {
       const r = await fetch(encodeURI(url));
-      return r.ok ? await r.text() : null;
-    } catch { return null; }
+      if (!r.ok) return null;
+      return await r.text();
+    } catch (err) {
+      console.warn('fetchText error for', url, err);
+      return null;
+    }
   }
 
+  // Try to fetch a directory listing (works only on servers that list directories).
+  // On GitHub Pages this will usually fail; we'll fallback to fallbackFiles.
   async function tryDirectory() {
-    const html = await fetchText(svgFolder);
-    if (!html) return null;
     try {
+      const resp = await fetch(encodeURI(svgFolder));
+      if (!resp.ok) return null;
+      const ct = resp.headers.get('content-type') || '';
+      // only try to parse HTML directory listings
+      if (!ct.includes('text/html')) return null;
+      const html = await resp.text();
       const doc = new DOMParser().parseFromString(html, 'text/html');
       const anchors = Array.from(doc.querySelectorAll('a[href$=".svg"], a[href$=".SVG"]'));
-      return Array.from(new Set(anchors.map(a => a.getAttribute('href').split('/').pop()).filter(Boolean)));
-    } catch {
+      const list = Array.from(new Set(anchors.map(a => a.getAttribute('href').split('/').pop()).filter(Boolean)));
+      return list.length ? list : null;
+    } catch (err) {
+      // expected on GH Pages (no listing) or on CORS restrictions
       return null;
     }
   }
@@ -72,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       svg.style.display = 'block';
       svg.style.transformOrigin = '50% 50%';
     } else {
-      console.warn('pokeBallSpin: file had no <svg> root:', name);
+      console.warn('pokeBallSpin: file had no <svg> root:', name, url);
     }
 
     stage.appendChild(wrapper);
@@ -81,12 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function loadAll() {
     stage.querySelectorAll('.loading').forEach(n => n.remove());
+
     let list = await tryDirectory();
-    if (!list || !list.length) list = fallbackFiles.slice();
+    if (!list || !list.length) {
+      console.info('pokeBallSpin: directory listing not available, falling back to provided filenames');
+      list = fallbackFiles.slice();
+    }
 
     for (const name of list) {
       const text = await fetchText(svgFolder + name);
       if (text) wrappers.push(injectSVG(name, text, svgFolder + name));
+      else console.warn('pokeBallSpin: SVG not found or failed to load:', name);
     }
 
     if (!wrappers.length) {
@@ -100,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       w.classList.toggle('visible', i === startIndex);
       w.style.zIndex = i === startIndex ? '2' : '1';
       w.style.opacity = i === startIndex ? '1' : '0';
-      if (gsap && i !== startIndex) gsap.set(w, { scale: 0.98 });
+      if (GSAP && i !== startIndex) GSAP.set(w, { scale: 0.98 });
     });
 
     startSpinForIndex(startIndex);
@@ -117,15 +137,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startSpinForIndex(index) {
     if (spinTween) {
-      try { spinTween.kill(); } catch {}
+      try { if (spinTween.kill) spinTween.kill(); } catch (e) { /* ignore */ }
       spinTween = null;
     }
     current = index;
     const wrapper = wrappers[index];
     if (!wrapper) return;
     const svg = wrapper.querySelector('svg');
-    if (!svg || reduced || typeof gsap === 'undefined') return;
-    spinTween = gsap.to(svg, { rotation: 360, duration: 6, ease: 'linear', repeat: -1 });
+    if (!svg || reduced || !GSAP) return;
+    try {
+      spinTween = GSAP.to(svg, { rotation: 360, duration: 6, ease: 'linear', repeat: -1 });
+    } catch (e) {
+      // if we can't animate, silently fallback
+      spinTween = null;
+    }
   }
 
   // crossfade + pop animations
@@ -138,7 +163,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!from || !to) return;
 
     animLock = true;
-    const tl = gsap.timeline({
+
+    if (!GSAP) {
+      // simple fallback: instant swap
+      try {
+        from.style.opacity = '0';
+        to.style.opacity = '1';
+      } finally {
+        current = target;
+        animLock = false;
+        startSpinForIndex(target);
+      }
+      return;
+    }
+
+    const tl = GSAP.timeline({
       onComplete() { animLock = false; }
     });
 
@@ -152,13 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
       tl.fromTo(svgTo, { scale: 0.88, rotation: -6 }, { scale: 1, rotation: 0, duration: 0.6, ease: 'elastic.out(1,0.6)' }, 0.12);
     }
 
-    // quick spin burst on the previous spinTween
+    // quick spin burst on the previous spinTween (if exists)
     if (spinTween) {
       tl.add(() => {
-        try { gsap.to(spinTween, { timeScale: 3, duration: 0.12 }); } catch {}
+        try { GSAP.to(spinTween, { timeScale: 3, duration: 0.12 }); } catch (_) {}
       }, 0);
       tl.add(() => {
-        try { gsap.to(spinTween, { timeScale: 1, duration: 0.6 }); } catch {}
+        try { GSAP.to(spinTween, { timeScale: 1, duration: 0.6 }); } catch (_) {}
       }, '+=0.9');
     }
 
