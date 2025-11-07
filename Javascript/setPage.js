@@ -29,13 +29,37 @@ if (!setId) {
 if (setTitleEl) setTitleEl.textContent = setName || setId;
 
 (function ensureBackLink() {
-  if (!document.getElementById('backToRegions')) {
-    const a = document.createElement('a');
-    a.id = 'backToRegions';
-    a.href = '../index.html'; 
-    a.innerHTML = '&lt;&lt;&lt; SETS';
-    a.setAttribute('aria-label','Back to sets');
-    document.body.appendChild(a);
+  if (document.getElementById('backToRegions')) return;
+
+  // prefer placing the back-link after the main content area
+  const mainArea = document.querySelector('main') || document.querySelector('.wrap') || document.body;
+
+  const container = document.createElement('div');
+  container.style.marginTop = '20px';
+  container.style.textAlign = 'center';
+
+  const a = document.createElement('a');
+  a.id = 'backToRegions';
+  a.href = 'index.html';               // points to the Sets index in the same folder as setPage.html
+  a.className = 'back-link region-back';
+  a.setAttribute('aria-label', 'Back to sets');
+  a.innerHTML = '&lt;&lt;&lt; SETS';
+
+  container.appendChild(a);
+
+  // If there's a .wrap element, insert the link immediately after it (matches page structure).
+  const wrapEl = document.querySelector('.wrap');
+  if (wrapEl && wrapEl.parentNode) {
+    if (wrapEl.nextSibling) wrapEl.parentNode.insertBefore(container, wrapEl.nextSibling);
+    else wrapEl.parentNode.appendChild(container);
+    return;
+  }
+
+  // Otherwise append inside <main> if present, otherwise fallback to body
+  if (mainArea && mainArea !== document.body) {
+    mainArea.appendChild(container);
+  } else {
+    document.body.appendChild(container);
   }
 })();
 
