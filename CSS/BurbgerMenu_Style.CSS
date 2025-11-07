@@ -1,155 +1,161 @@
 :root{
-  --accent-blue: #5daec8;
-  --text-on-dark: #e6f9fb;
-  --overlay-bg-url: url("../IMAGES/BGround/Setting.svg");
-  --overlay-target-opacity: 0.8;
-  --menu-left-width: min(520px, 70vw);
-  --menu-pad: clamp(28px, 6vw, 48px);
+--accent-blue: #5daec8;
+--text-on-dark: #e6f9fb;
+--overlay-bg-url: url("../IMAGES/BGround/Setting.svg");
+--overlay-target-opacity: 0.8;
+--menu-left-width: min(520px, 70vw);
+--menu-pad: clamp(28px, 6vw, 48px);
 }
 
 header { position: relative; z-index: 10020; }
 
 .hamburgBtn {
-  position: absolute;
-  right: 18px;
-  top: 12px;
-  width: 36px;
-  height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: 0;
-  color: var(--accent-blue);
-  z-index: 10021;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+position: absolute;
+right: 18px;
+top: 12px;
+width: 36px;
+height: 36px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+background: transparent;
+border: 0;
+color: var(--accent-blue);
+z-index: 10021;
+cursor: pointer;
+-webkit-tap-highlight-color: transparent;
 }
 .hamburgBtn:focus { outline: none; }
 .hamburgBtn .burger path { stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 
 .menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10010;
-  background-image: var(--overlay-bg-url);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 0;                 
-  pointer-events: none;       
-  transition: opacity 0.28s ease;
-  display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
-  will-change: opacity;
+position: fixed;
+inset: 0;
+z-index: 10010;
+background-image: var(--overlay-bg-url);
+background-repeat: no-repeat;
+background-position: center center;
+background-size: cover;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.28s ease, visibility 0.12s ease;
+display: flex;
+align-items: stretch;
+justify-content: flex-start;
+will-change: opacity;
+visibility: hidden;
+}
+
+.menu-overlay[aria-hidden="false"] {
+pointer-events: auto;
+visibility: visible;
+opacity: var(--overlay-target-opacity);
 }
 
 .menu-overlay-inner {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  box-sizing: border-box;
-  align-items: stretch;
+display: flex;
+width: 100%;
+min-height: 100vh;
+box-sizing: border-box;
+align-items: stretch;
 }
-
 
 .overlay-nav {
-  position: relative;
-  width: var(--menu-left-width);
-  max-width: 56rem;
-  padding: var(--menu-pad);
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;        
-  justify-content: flex-start;
-  pointer-events: auto;       
-  background: transparent;    
+position: relative;
+width: var(--menu-left-width);
+max-width: 56rem;
+padding: var(--menu-pad);
+box-sizing: border-box;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+pointer-events: auto;
+background: transparent;
 }
-
 
 .overlay-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 2.5vw, 26px);
-  align-items: flex-start;   
-  text-align: left;
+list-style: none;
+margin: 0;
+padding: 0;
+width: 100%;
+display: flex;
+flex-direction: column;
+gap: clamp(12px, 2.5vw, 26px);
+align-items: flex-start;
+text-align: left;
 }
 
-
 .overlay-link {
-  color: #5daec8 !important;        
-  text-decoration: none;
-  display: inline-block;
-  font-family: "Oswald", system-ui, sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: clamp(22px, 4.4vw, 48px);
-  text-align: left;
+color: #5daec8 !important;
+text-decoration: none;
+display: inline-block;
+font-family: "Oswald", system-ui, sans-serif;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 0.12em;
+font-size: clamp(22px, 4.4vw, 48px);
+text-align: left;
 }
 
 .overlay-link.active {
-  color: #5daec8 !important; 
-  font-family: "Protest Strike", "Oswald", system-ui, sans-serif;
-  font-size: clamp(24px, 5.2vw, 52px);
-  letter-spacing: 0.14em;
+color: #5daec8 !important;
+font-family: "Protest Strike", "Oswald", system-ui, sans-serif;
+font-size: clamp(24px, 5.2vw, 52px);
+letter-spacing: 0.14em;
 }
-
 
 .overlay-link:hover,
 .overlay-link:focus {
-  color: #5daec8;
-  transform: translateX(6px);
+color: #5daec8;
+transform: translateX(6px);
 }
 
-
 .overlay-spacer {
-  flex: 1 1 auto;
-  pointer-events: none;
+flex: 1 1 auto;
+pointer-events: none;
 }
 
 .overlay-nav::before { display: none !important; content: none !important; }
 
 @media (max-width: 720px) {
-  .overlay-nav {
-    width: 100%;
-    max-width: 100%;
-    padding: 18px;
-    background: transparent;
-  }
-  .overlay-link { font-size: clamp(18px, 6vw, 28px); }
-  .overlay-link.active { font-size: clamp(20px, 6.6vw, 34px); }
+.overlay-nav {
+width: 100%;
+max-width: 100%;
+padding: 18px;
+background: transparent;
+}
+.overlay-link { font-size: clamp(18px, 6vw, 28px); }
+.overlay-link.active { font-size: clamp(20px, 6.6vw, 34px); }
 }
 
-.menu-overlay[aria-hidden="true"] { visibility: visible; }
+.menu-overlay[aria-hidden="true"] {
+pointer-events: none;
+visibility: hidden;
+opacity: 0;
+}
 
 #siteMenu, .slide-menu {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: min(720px, 92vw);
-  max-width: 780px;
-  transform: translateX(100%);
-  z-index: 10011;
-  overflow: auto;
-  display: flex;
-  align-items: flex-start;
-  transition: transform .36s ease;
+position: fixed;
+top: 0;
+right: 0;
+height: 100vh;
+width: min(720px, 92vw);
+max-width: 780px;
+transform: translateX(100%);
+z-index: 10011;
+overflow: auto;
+display: flex;
+align-items: flex-start;
+transition: transform .36s ease;
 }
 .slide-menu-inner {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  padding: 28px 40px;
-  box-sizing: border-box;
-  background-color: rgba(10,10,12,0.95);
-  color: #dfeff1;
+position: relative;
+width: 100%;
+min-height: 100vh;
+padding: 28px 40px;
+box-sizing: border-box;
+background-color: rgba(10,10,12,0.95);
+color: #dfeff1;
 }
 
 .hamburgBtn:focus-visible { outline: 3px solid rgba(93,174,200,0.12); border-radius: 6px; }

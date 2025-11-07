@@ -82,7 +82,7 @@ function apiFetchWithRetry(url, fetchOptions = {}, opts = {}, apiKey) {
 }
 
 
-const POKEBALL_SRC = '../IMAGES/PokeBallSVG/SVG/pokeball.svg';
+const POKEBALL_SRC = '../IMAGES/PokeBallSVG/512px-Poké_Ball_icon.png'; 
 let _overlayEl = null;
 function showLoadingOverlay(text = 'LOADING CARD SETS....') {
   // if overlay exists already, keep it
